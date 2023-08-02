@@ -6,12 +6,18 @@ This is a simple service for storing and searching postal addresses.
 
 ![Deployment diagram](diagrams/deployment.png)
 
+Notes:
+- Lambdas fit really well here, but for me it was easier to work with ECS
+- DocumentDB was chosen as a drop-in replacement for MongoDB, but turned out to be incompatible with full-text search indices
+
 ## How to navigate in this project
 
 There are 3 big parts:
 - [infra](infra/) contains a Terraform module for provisioning some "foundational" infrastructure.
 - [dev/app](dev/app/) contains a Spring Boot application written in Kotlin which contains all the business logic.
 - finally, [dev/stack](dev/stack/) contains a Java-based CDK app which provisions a DocumentDB cluster and deploys the Spring Boot application in ECS Fargate with an Application Load Balancer on top.
+
+Check out READMEs in those individual folders for more information.
 
 On top of that, there is a build pipeline for the Spring Boot application in [.github/workflows/main.yml](.github/workflows/main.yml).
 
@@ -36,3 +42,4 @@ Below is a not complete list of things that can be improved in no particular ord
 - Tests
 - Spring Boot configuration improvements
 - Metric-based auto-scaling (for production-like setup)
+- API can be improved with versioning, validation, etc.
