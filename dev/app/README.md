@@ -8,6 +8,11 @@ This is a Spring Boot application with "business" logic.
 2. Verify it is up with `http :8080/actuator/health`.
 3. Access API with `http :8080`.
 
+### How to build it locally
+
+1. Run `./gradlew bootBuildImage --imageName=<image_name>:<image_tag>`.
+2. You can run or push the image.
+
 ## Example API calls
 
 ### Save new address
