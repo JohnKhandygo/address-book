@@ -2,6 +2,10 @@
 
 This is a simple service for storing and searching postal addresses.
 
+## Deployment diagram
+
+![Deployment diagram](diagrams/deployment.png)
+
 ## How to navigate in this project
 
 There are 3 big parts:
