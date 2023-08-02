@@ -1,18 +1,36 @@
-# Welcome to your CDK Java project!
+This is a CDK app for address-book app deployment.
 
-This is a blank project for CDK development with Java.
+## How to run it
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Assuming, your AWS account is already CDK-enabled (i.e. `cdk bootstrap` has been run):
 
-It is a [Maven](https://maven.apache.org/) based project, so you can open this project with any Maven compatible Java IDE to build and run tests.
-
-## Useful commands
-
- * `mvn package`     compile and run tests
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+1. Ensure that your AWS principal has the following or equivalent policy:
+     ```json
+     {
+       "Version": "2012-10-17",
+       "Statement": [
+         {
+           "Effect": "Allow",
+           "Action": [
+             "sts:AssumeRole"
+           ],
+           "Resource": [
+             "arn:aws:iam::*:role/cdk-*"
+           ]
+         }
+       ]
+     }
+     ```
+2. To deploy run
+   ```shell
+   AWS_PROFILE=<profile_name> \
+   CDK_ACCOUNT=$(aws sts get-caller-identity --profile <profile_name> | jq -r .Account) \
+   CDK_REGION=<region> \
+   ADDRESS_BOOK_APP_IMAGE_TAG=<image_tag> \ 
+   cdk deploy
+   ```
+   > The above command relies on `jq` to extract AWS account number from the current identity.
+   
+   > If `ADDRESS_BOOK_APP_IMAGE_TAG` is not specified, an image with the `latest` tag will be deployed.
+3. To undeploy run the same command with `destroy` in the end instead of `deploy`.
+   > Destroying the app will retain the DocumentDB cluster and all the data with it.
