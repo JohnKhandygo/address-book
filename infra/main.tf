@@ -30,3 +30,7 @@ module "vpc" {
   single_nat_gateway     = true
   one_nat_gateway_per_az = false
 }
+
+resource "aws_ecr_repository" "address-book" {
+  name = "address-book-02"
+}
