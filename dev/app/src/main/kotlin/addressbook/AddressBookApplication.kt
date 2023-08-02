@@ -1,4 +1,4 @@
-package sandbox.addressbook
+package addressbook
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

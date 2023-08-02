@@ -1,4 +1,4 @@
-package sandbox.addressbook
+package addressbook
 
 import org.springframework.boot.fromApplication
 import org.springframework.boot.test.context.TestConfiguration
