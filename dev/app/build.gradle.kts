@@ -41,3 +41,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.register<JavaExec>("localRun") {
+	classpath = sourceSets.test.get().runtimeClasspath
+	mainClass = "addressbook.TestAddressBookApplicationKt"
+}
